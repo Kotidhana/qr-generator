@@ -15,10 +15,12 @@ def generation():
     name        =   str(request.form.get('name'))
     course      =   str(request.form.get('course'))
     date        =   str(request.form.get('date'))
-    val         =   (name,course, date)
 
-    code        =   pyqrcode.create(val)
-    code_png    =   code.png_as_base64_str(scale=5)
-    html_img = '<img src="data:image/png;base64,{}">'.format(code_png)
+    code        =   pyqrcode.create(name)
+    code.svg('uca.svg', scale=4)
+    code.eps('uca.svg', scale=2)
+    html_img    =   code.terminal(quiet_zone=1)
 
-    return redirect('index.html', code_png=html_img)
+    return render_template('qrcode.html', code_png=html_img)
+
+    # https://www.youtube.com/watch?v=zfodARFn25s
