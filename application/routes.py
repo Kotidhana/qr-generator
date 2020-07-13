@@ -12,15 +12,12 @@ def index():
 
 @app.route('/qrcode', methods=['GET','POST'])
 def generation():
-    name        =   str(request.form.get('name'))
-    course      =   str(request.form.get('course'))
-    date        =   str(request.form.get('date'))
+    name        =   request.form.get('name')
+    course      =   request.form.get('course')
+    date        =   request.form.get('date')
+    str         =   (name+" | "+course+" | "+date)
 
-    code        =   pyqrcode.create(name)
-    code.svg('uca.svg', scale=4)
-    code.eps('uca.svg', scale=2)
-    html_img    =   code.terminal(quiet_zone=1)
+    code        =   pyqrcode.create(str)
+    code.png('qrcode.png', scale=4)
 
-    return render_template('qrcode.html', code_png=html_img)
-
-    # https://www.youtube.com/watch?v=zfodARFn25s
+    return render_template('qrcode.html')
