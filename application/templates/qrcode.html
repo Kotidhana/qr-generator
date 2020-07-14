@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-lg-4 mx-auto">
             <div class="card">
+                <h1 class="text-center">Your QR Code</h1>
                 <div class="card-body mx-auto">
                     <img class="img-fluid "  src='{{ url_for("download", filename=filename) }}'/>
                     <form action="{{ url_for('download') }}">
