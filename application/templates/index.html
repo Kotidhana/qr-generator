@@ -2,34 +2,38 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-8 mx-auto">
             <h1 class="text-center">QR CODE GENERATOR</h1>
-            <form action="{{ url_for('generation') }}" method="post">
-                <fieldset class="form-group">
-                    <legend>Input Data</legend>
-                    {{ form.hidden_tag() }}
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr>
-                                <th scope="row" class="align-middle text-right">{{ form.name.label }}</th>
-                                <td>{{ form.name(size=20) }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="align-middle text-right">{{ form.course.label }}</th>
-                                <td>{{ form.course() }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="align-middle text-right">{{ form.date.label }}</th>
-                                <td>{{ form.date(class='datepicker') }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ form.generate() }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </fieldset>
-            </form>
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ url_for('generation') }}" method="post">
+                        <fieldset class="form-group">
+                            <legend>Input Data</legend>
+                            {{ form.hidden_tag() }}
+                            <table class="table table-borderless table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="align-middle text-right">{{ form.name.label }}</th>
+                                        <td>{{ form.name(size=20) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="align-middle text-right">{{ form.course.label }}</th>
+                                        <td>{{ form.course(class="input-group input-group-lg") }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="align-middle text-right">{{ form.date.label }}</th>
+                                        <td>{{ form.date() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td >{{ form.generate(class_="btn btn-info") }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </form>    
+                </div>
+            </div>
         </div>
     </div>
 </div>
