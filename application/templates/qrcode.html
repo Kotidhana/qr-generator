@@ -4,12 +4,14 @@
     <div class="row">
         <div class="col-lg-4 mx-auto">
             <div class="card">
-                <h1 class="text-center">Your QR Code</h1>
+                <h1 class="text-center">Here's your QR Code for {{ name }}</h1>
                 <div class="card-body mx-auto">
                     <img class="img-fluid "  src='{{ url_for("download", filename=filename) }}'/>
                     <form action="{{ url_for('download') }}">
-                        <button class="btn btn-success ml-5"> Download</button>
+                        <button class="btn btn-success ml-4 w-75"> Download</button>
                     </form>
+                    <br>
+                    <a href="{{ url_for('index') }}" class="badge badge-dark float-right">Home</a>
                 </div>
             </div>
         </div>
