@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, send_file
+from flask import Flask, render_template, url_for, request, redirect, send_file, session
 from application import app
 from application.forms import GenerateForm
 import pyqrcode
@@ -8,6 +8,7 @@ import os
 @app.route('/')
 @app.route('/home')
 def index():
+    session['name']=False
     gForm   =   GenerateForm()
     return render_template('index.html', form=gForm)
 
@@ -19,12 +20,14 @@ def generation():
     str         =   (name+" | "+course+" | "+date)
 
     code        =   pyqrcode.create(str)
-    code.png('qrcode.png', scale=5)
-    os.system('cmd /c "move qrcode.png application\qr"') 
-
-    return render_template('qrcode.html')
+    nFile       =   'qrcode'+name+'.png'
+    session['file']=nFile
+    code.png(nFile, scale=5)
+    os.system('cmd /c "move "'+nFile+'" application\qr"') 
+    return render_template('qrcode.html', name=name)
 
 @app.route('/download')
 def download():
-    filename = "qr\qrcode.png"
+    nFile=session.get('file')
+    filename = "qr/"+nFile
     return send_file(filename,as_attachment=True)
